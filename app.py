@@ -16,6 +16,14 @@ sa = SentimentIntensityAnalyzer()
 def my_form():
     return render_template('form.html')
 
+@app.route('/analyze', methods=['POST'])
+def analyze():
+    text = request.form['text1']
+    # Perform sentiment analysis here
+    sentiment = analyze_sentiment(text)  # This should return a dictionary with results
+    # Render result in HTML template or return a JSON response
+    return render_template('result.html', sentiment=sentiment)  # Make sure 'result.html' displays the sentiment correctly
+
 
 @app.route('/', methods=['POST'])
 def my_form_post():
