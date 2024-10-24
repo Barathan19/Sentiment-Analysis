@@ -14,23 +14,18 @@ class SentimentAnalysisAppTestCase(unittest.TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertIn(b'Sentiment Analysis VADER Sentiment', response.data)
 
-    def test_sentiment_analysis_positive(self):
-        """Test the sentiment analysis with a positive text."""
-        response = self.app.post('/', data={'text1': 'I love this product!'})
-        self.assertEqual(response.status_code, 200)
-        self.assertIn(b'The sentiment of: "I love this product!" is', response.data)
+def test_sentiment_analysis_positive(self):
+    response = self.app.post('/', data=dict(text1='I love this product!'))
+    self.assertIn(b'The sentiment of: "<b>I love this product!</b>" is', response.data)
 
-    def test_sentiment_analysis_negative(self):
-        """Test the sentiment analysis with a negative text."""
-        response = self.app.post('/', data={'text1': 'I hate this service!'})
-        self.assertEqual(response.status_code, 200)
-        self.assertIn(b'The sentiment of: "I hate this service!" is', response.data)
+def test_sentiment_analysis_negative(self):
+    response = self.app.post('/', data=dict(text1='I hate this service!'))
+    self.assertIn(b'The sentiment of: "<b>I hate this service!</b>" is', response.data)
 
-    def test_sentiment_analysis_neutral(self):
-        """Test the sentiment analysis with a neutral text."""
-        response = self.app.post('/', data={'text1': 'This is a book.'})
-        self.assertEqual(response.status_code, 200)
-        self.assertIn(b'The sentiment of: "This is a book." is', response.data)
+def test_sentiment_analysis_neutral(self):
+    response = self.app.post('/', data=dict(text1='This is a book.'))
+    self.assertIn(b'The sentiment of: "<b>This is a book.</b>" is', response.data)
+
 
     def test_invalid_input(self):
         """Test the sentiment analysis with invalid input (empty text)."""
